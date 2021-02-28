@@ -1,0 +1,19 @@
+version: '3'
+services:
+  moneylion-api:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DBServer: "db"
+    depends_on:
+      - db
+    restart: always
+  db:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Str0ngPa55w0rd!"
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
